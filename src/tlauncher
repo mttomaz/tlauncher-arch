@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 [[ "$(whoami)" = "root" ]] && echo "Script must be run as a normal user." && exit
 
@@ -6,6 +6,16 @@
 RED="\033[1;31m"
 GREEN="\033[1;32m"
 END="\033[0m"
+
+usage() {
+  echo "
+  Usage:
+    -h, --help, help     | Print this message
+    -u, --update, update | Update tlauncher.jar
+    -r, --remove, remove | Remove tlauncher from your system, except your \$HOME/.minecraft dir 
+    nothing              | Launch TLauncher
+  "
+}
 
 update() {
   echo -e "\n${GREEN}Downloading the latest version...${END}"
@@ -15,15 +25,6 @@ update() {
   rm /tmp/jar
   rm -rf /tmp/tlauncher/
   echo -e "\n${GREEN}Done!${END}"
-}
-
-usage() {
-  echo "
-  Usage:
-    --update, update | Update tlauncher.jar
-    --remove, remove | Remove tlauncher from your system, except your \$HOME/.minecraft dir 
-    nothing          | Launch TLauncher
-  "
 }
 
 remove() {
@@ -41,15 +42,21 @@ remove() {
   [[ "${KEEP_DOTDIR,,}" = "n" ]] && rm -rf "$HOME/.tlauncher"
 }
 
+launch() {
+  java -jar /usr/share/tlauncher/tlauncher.jar
+}
 
 case "$1" in
-  -u|--update|update)
-    update ; exit ;;
-  -r|--remove|remove)
-    remove ; exit ;;
-  *)
-    usage  ; exit ;;
+-u | --update | update)
+  update && exit
+  ;;
+-r | --remove | remove)
+  remove && exit
+  ;;
+-h | --help | help)
+  usage && exit
+  ;;
+*)
+  launch
+  ;;
 esac
-
-
-java -jar /usr/share/tlauncher/tlauncher.jar

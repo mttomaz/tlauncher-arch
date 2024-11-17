@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 [[ "$(whoami)" = "root" ]] && echo "Script must be run as a normal user." && exit
 
@@ -11,13 +11,13 @@ END="\033[0m"
 ## (They use java 8, but instead i'm installing the most recent java version).
 # Downloading packages
 pkgs=(
-	wget
-	jdk-openjdk
-	jre-openjdk
-	jre-openjdk-headless
-	java-openjfx
+  wget
+  jdk-openjdk
+  jre-openjdk
+  jre-openjdk-headless
+  java-openjfx
 )
-sudo pacman -S --noconfirm --needed "${pkgs[@]}"
+sudo pacman -Sy --noconfirm --needed "${pkgs[@]}"
 
 # Downloading TLauncher
 echo -e "\n${GREEN}Downloading TLauncher...${END}"
