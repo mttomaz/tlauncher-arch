@@ -1,6 +1,8 @@
 #!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
 
-[[ "$(whoami)" = "root" ]] && echo "Script must be run as a normal user." && exit
+[[ "$(id -u)" -eq 0 ]] && echo "Script must be run as a normal user." && exit
 
 # Colors
 RED="\033[1;31m"
@@ -12,7 +14,7 @@ usage() {
   Usage:
     -h, --help, help     | Print this message
     -u, --update, update | Update tlauncher.jar
-    -r, --remove, remove | Remove tlauncher from your system, except your \$HOME/.minecraft dir 
+    -r, --remove, remove | Remove tlauncher from your system, except your \$HOME/.minecraft dir
     nothing              | Launch TLauncher
   "
 }
@@ -34,19 +36,16 @@ remove() {
     /usr/share/applications/tlauncher.desktop
     /usr/bin/tlauncher
   )
-  echo -e "\n${GREEN}Removing TLauncher system files...${END}"
-  rm -rf "${SYSTEM_FILES[@]}"
-  echo -en "\nDo you want to keep all those java packages installed (${GREEN}Yy${END}/${RED}Nn${END})?" && read -r KEEP_JAVA
-  echo -en "\nDo you want to keep your \$HOME/.tlauncher dir (${GREEN}Yy${END}/${RED}Nn${END})?" && read -r KEEP_DOTDIR
-  [[ "${KEEP_JAVA,,}" = "n" ]] && sudo pacman -Rns jdk-openjdk jre-openjdk{,-headless} java-openjfx
+  echo -e "\n${GREEN}Removing TLauncher system files ...${END}"
+  sudo rm -rf "${SYSTEM_FILES[@]}"
+  echo -en "\nDo you want to keep the package \"jre-openjdk\" installed (${GREEN}Yy${END}/${RED}Nn${END})? " && read -r KEEP_JAVA
+  echo -en "\nDo you want to keep your \"\$HOME/.tlauncher\" dir (${GREEN}Yy${END}/${RED}Nn${END})? " && read -r KEEP_DOTDIR
+  [[ "${KEEP_JAVA,,}" = "n" ]] && sudo pacman -Rns jre-openjdk
   [[ "${KEEP_DOTDIR,,}" = "n" ]] && rm -rf "$HOME/.tlauncher"
+  echo -e "\n${GREEN}TLauncher Removed!${END}"
 }
 
-launch() {
-  java -jar /usr/share/tlauncher/tlauncher.jar
-}
-
-case "$1" in
+case "${1:-}" in
 -u | --update | update)
   update && exit
   ;;
@@ -57,6 +56,6 @@ case "$1" in
   usage && exit
   ;;
 *)
-  launch
+  exec java -jar /usr/share/tlauncher/tlauncher.jar
   ;;
 esac

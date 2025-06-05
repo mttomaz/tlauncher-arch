@@ -1,23 +1,27 @@
-# TLauncher
+<div align="center">
+
+# tlauncher-arch
+[![stars](https://img.shields.io/github/stars/mttomaz/tlauncher-arch?color=7E9CD8&style=for-the-badge)](https://github.com/mttomaz/tlauncher-arch/stargazers)
+[![issues](https://img.shields.io/github/issues/mttomaz/tlauncher-arch?color=FF5D62&style=for-the-badge)](https://github.com/mttomaz/tlauncher-arch/issues)
+[![size](https://img.shields.io/github/repo-size/mttomaz/tlauncher-arch?color=76946A&style=for-the-badge)](https://github.com/mttomaz/tlauncher-arch)
+[![license](https://img.shields.io/github/license/mttomaz/tlauncher-arch?color=957FB8&style=for-the-badge)](https://github.com/mttomaz/tlauncher-arch/blob/master/LICENSE)
+
+</div>
+
 This is a repo that i made to install TLauncher on Arch Linux directly from their [site](https://tlauncher.org/).
 
-### Warning !
-This script is only a tool to facilitate the download of TLauncher. The use of TLauncher is entirely at your own risk. I am not responsible for any issues that may arise from the use of TLauncher. If you are curious about why this warning even exists, see [this](https://github.com/MatheusTT/tlauncher-arch/issues/1) issue.
+> [!Warning]
+> This script is only a tool to facilitate the download of TLauncher.
+> The use of TLauncher is entirely at your own risk. I am not responsible
+> for any issues that may arise from the use of TLauncher. If you are curious
+> about why this warning even exists, see [this](https://github.com/MatheusTT/tlauncher-arch/issues/1) issue.
 
-## How to install
+## Installing
+Run the following command to install TLauncher:
 
-1. Clone and enter the repo
-    ```bash
-    git clone https://github.com/MatheusTT/tlauncher-arch.git && cd tlauncher-arch
-    ```
-2. Change the permissions of the script
-    ```bash
-    chmod +x ./install.sh
-    ```
-3. Install tlauncher
-    ```bash
-    ./install.sh
-    ```
+```bash
+curl -fsSl https://raw.githubusercontent.com/mttomaz/tlauncher-arch/master/install.sh | sh
+```
 
 ## Usage
 After the installation, you can just type `tlauncher` in the terminal to launch tlauncher.
