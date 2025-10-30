@@ -8,9 +8,6 @@ info_msg() {
   echo -e "\n\033[1;32m${1}\033[0m"
 }
 
-info_msg "Installing Packages ..."
-sudo pacman -Sy --noconfirm --needed wget git unzip jre-openjdk
-
 info_msg "Cloning Repo ..."
 git clone https://github.com/mttomaz/tlauncher-arch.git "$HOME/tlauncher-arch"
 cd "$HOME/tlauncher-arch" || exit
