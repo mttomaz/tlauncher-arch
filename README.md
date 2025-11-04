@@ -20,7 +20,7 @@ This is a repo that i made to install TLauncher on Arch Linux directly from thei
 Run the following command to install TLauncher:
 
 ```bash
-curl -fsSl https://raw.githubusercontent.com/mttomaz/tlauncher-arch/master/install.sh | sh
+curl -fsSl https://github.com/pablaofficeal/tlauncher-arch/install.sh | sh
 ```
 
 ## Usage
