@@ -28,6 +28,17 @@ sudo mv src/tlauncher /usr/bin/
 sudo mv src/tlauncher.png /usr/share/icons
 sudo mv src/tlauncher.desktop /usr/share/applications
 
+# Check if NVIDIA GPU is present
+if lspci | grep -i 'nvidia' >/dev/null 2>&1; then
+    # Prompt user with Yes as default
+    read -p "Use NVIDIA GPU by default? (Y/n): " use_nvidia
+    use_nvidia=${use_nvidia:-Y}
+    
+    if [[ "$use_nvidia" =~ ^[Yy]$ ]]; then
+        sed -i 's|exec java -jar /usr/share/tlauncher/tlauncher.jar|exec env __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia java -jar /usr/share/tlauncher/tlauncher.jar|' /usr/bin/tlauncher
+    fi
+fi
+
 cd "$OLDPWD" || exit
 rm -rf "$HOME/tlauncher-arch"
 info_msg "Installation Complete!"
