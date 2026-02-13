@@ -42,6 +42,11 @@ remove() {
   echo -en "\nDo you want to keep your \"\$HOME/.tlauncher\" dir (${GREEN}Yy${END}/${RED}Nn${END})? " && read -r KEEP_DOTDIR
   [[ "${KEEP_JAVA,,}" = "n" ]] && sudo pacman -Rns jre-openjdk
   [[ "${KEEP_DOTDIR,,}" = "n" ]] && rm -rf "$HOME/.tlauncher"
+  # This dir is created by tlauncher to save minecraft version
+  if [[ -d "$HOME/.minecraft" ]]; then
+    read -rp $'\nDo you want to keep your "$HOME/.minecraft" dir ('"${GREEN}Yy${END}/${RED}Nn${END}"')?: ' CLEAN_MINECRAFT
+    [[ "${CLEAN_MINECRAFT,,}" == "n" ]] && rm -rf "$HOME/.minecraft"
+  fi
   echo -e "\n${GREEN}TLauncher Removed!${END}"
 }
 

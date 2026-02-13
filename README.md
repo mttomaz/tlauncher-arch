@@ -19,9 +19,6 @@ This is a repo that i made to install TLauncher on Arch Linux directly from thei
 ## Installing
 Run the following command to install TLauncher:
 
-```bash
-curl -fsSl https://github.com/pablaofficeal/tlauncher-arch/master/install.sh | sh
-```
 
 ## Usage
 After the installation, you can just type `tlauncher` in the terminal to launch tlauncher.
